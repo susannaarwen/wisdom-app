@@ -1,9 +1,9 @@
 import "./App.css";
-import { Form } from "./Form";
+import { VideoForm } from "./VideoForm";
 
 function App() {
   return <>
-  <Form />
+  <VideoForm />
   </>;
 }
 

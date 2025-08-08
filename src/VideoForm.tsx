@@ -4,29 +4,26 @@ interface FormState {
     title: string;
     author: string;
     tradition: string;
-    url: string;
     thoughts: string;
+    favouriteQuote: string,
+    url: string;
     time: string;
 }
 
-export function Form() {
+export function VideoForm() {
 
     const handleSubmit = (values: FormState): void => {
         console.log(values);
     };
-    const formik = useFormik<FormState>({initialValues:{title:'', author: '', tradition:'not-specified', url: '', thoughts: '', time: '' }, onSubmit: handleSubmit})
+    const formik = useFormik<FormState>({initialValues:{title:'', author: '', tradition:'not-specified', thoughts: '', favouriteQuote: '', time: '', url: ''}, onSubmit: handleSubmit})
     // ALSO:
     // could we have a suggested time that might be edited
     // but not be in the future
     // anyway thanks
 
-    //formik?
-
-    // the old school react way - to have a useState 
-
     return(
         // STEPS:
-        // NEED TO CALL HANDLE SUBMIT IN THE FORM TAG -> ON SUBMIT -> HANDLE SUBMIT ETC.
+
         // NEED TO "CAPTURE THE TIME OF THE SUBMISSION"
         // NEED TO DISPLAY THE TIME BUT THAT IS STEP 3 I THINK
         <form onSubmit={formik.handleSubmit}>
@@ -35,10 +32,10 @@ export function Form() {
                 <input type="text" name="title" id="title" value={formik.values.title} onChange={formik.handleChange}/>
                 <br />
                 <label htmlFor="author"> Who is the author of these teachings? e.g. "Rumi"</label>
-                <input type="text" name="author" id="author"/>
+                <input type="text" name="author" id="author" value={formik.values.author} onChange={formik.handleChange}/>
                 <br />
                 <label htmlFor="tradition"> What tradition is this teaching in? e.g. "Christian Mystics"</label>
-                <select name="tradition" id="tradition" >
+                <select name="tradition" id="tradition" value={formik.values.tradition} onChange={formik.handleChange}>
                     <option value="christan-mystics">Christian Mystics</option>
                     <option value="sufi">Sufi</option>
                     <option value="not-specified">Not Specified</option>
@@ -46,10 +43,14 @@ export function Form() {
                     // could be an enum one day 
                 </select>
                 <br />
-                <label htmlFor="url">What is the link to this video?</label>
-                <input type="url" name="url" id="url" />
                 <label htmlFor="thoughts">What were your thoughts on the video?</label>
                 <input type="text" name="thoughts" id="thoughts"/>
+                <br />
+                <label htmlFor="quote">What was your favourite quote from this video?</label>
+                <input type="text" id="quote"></input>
+                <br />
+                <label htmlFor="url">What is the link to this video?</label>
+                <input type="url" name="url" id="url" />
                 <br />
             </div>
                 <div id="button">
@@ -63,28 +64,7 @@ export function Form() {
 // think about adding validation - maybe
 // might be good one to discuss with Liv later today - data validation - thank you
 
-/*
-TO DO
-1. Add thoughts input
-2. Move inputs outside of labels as per first example
-3. Add names to input tags
 
-
-*/
-
-/*
-BEST PRACTICE FOR A11Y IN FORMS
-- NAME
-- -> Also helps you to refer to form field in the code
-- ID
-- BECAUSE you need to collect your label to your form field
-    - there is a prop on your label tag that is htmlfor
-    - 
-
-
-
-
-*/
 
 // add value and on change to each input
 // fill out inputs
@@ -101,3 +81,4 @@ BEST PRACTICE FOR A11Y IN FORMS
 // TWO DIRECTIONS
 // BE HAPPY THAT I A FORM AND MAKE IT LOOK PRETTY
 // OR HANDLE SUBMISSION
+// when form is done add in time but how please how
